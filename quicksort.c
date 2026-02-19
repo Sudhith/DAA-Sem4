@@ -1,12 +1,19 @@
 #include <stdio.h>
 
+// swap function
+void swap(int *a, int *b)
+{
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
 // Partition function
 int partition(int arr[], int low, int high)
 {
     int pivot = arr[low];   // choosing first element as pivot
     int i = low + 1;
     int j = high;
-    int temp;
 
     while(i <= j)
     {
@@ -17,17 +24,11 @@ int partition(int arr[], int low, int high)
             j--;
 
         if(i < j)
-        {
-            temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-        }
+            swap(&arr[i], &arr[j]);
     }
 
     // place pivot in correct position
-    temp = arr[low];
-    arr[low] = arr[j];
-    arr[j] = temp;
+    swap(&arr[low], &arr[j]);
 
     return j;   // pivot index
 }
@@ -39,10 +40,7 @@ void quickSort(int arr[], int low, int high)
     {
         int p = partition(arr, low, high);
 
-        // sort left side
-        quickSort(arr, low, p - 1);
-
-        // sort right side
+        quickSort(arr, low, p- 1);
         quickSort(arr, p + 1, high);
     }
 }
