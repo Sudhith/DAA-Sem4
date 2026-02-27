@@ -1,0 +1,54 @@
+#include<stdio.h>
+#define MAX 4
+
+void warshall(int p[MAX][MAX])
+{
+    int i, j, k;
+
+    for(k = 0; k < MAX; k++)
+    {
+        printf("R%d\n", k + 1);
+
+        for(i = 0; i < MAX; i++)
+        {
+            for(j = 0; j < MAX; j++)
+            {
+                if(p[i][j] == 0 && p[i][k] == 1 && p[k][j] == 1)
+                {
+                    p[i][j] = 1;  
+                }
+                printf("%d ", p[i][j]);
+            }
+            printf("\n");
+        }
+        printf("\n");
+    }
+}
+
+int main()
+{
+    int p[MAX][MAX];
+
+    printf("Enter adjacency matrix:\n");
+    for(int i = 0; i < MAX; i++)
+    {
+        for(int j = 0; j <MAX ; j++)
+        {
+            scanf("%d", &p[i][j]);
+        }
+    }
+
+    warshall(p);
+
+    printf("Final:\n");
+    for(int i = 0; i < MAX; i++)
+    {
+        for(int j = 0; j < MAX; j++)
+        {
+            printf("%d ", p[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
